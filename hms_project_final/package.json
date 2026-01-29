@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "message": "^0.0.1",
+    "offline": "^0.0.1",
+    "sls": "^0.1.0"
+  }
+}
