@@ -1,9 +1,8 @@
-Here is a more professional and detailed README for your Mini Hospital Management System (HMS). This version includes the features from your documentation to make the project stand out.
+
 
 Mini Hospital Management System (HMS)
 A comprehensive web application designed to streamline doctor availability management and patient appointment booking. The system features role-based access control, Google Calendar integration, and a dedicated microservice for automated email notifications.
-
-🚀 Features
+ Features
 For Doctors
 
 Availability Management: Create and update specific time slots (e.g., 10:00–11:00) for appointments.
@@ -24,7 +23,7 @@ Seamless Booking: Select and book a doctor’s time slot; booked slots are immed
 
 Appointment Reminders: Automatic calendar events and email confirmations for every booking.
 
-🛠️ Tech Stack
+Tech Stack
 
 Backend: Django (Python) with Django ORM.
 
@@ -37,7 +36,7 @@ Email Service: Node.js (Serverless Framework) running on AWS Lambda (simulated v
 
 Integrations: Google Calendar API (OAuth2).
 
-⚙️ Installation & Setup
+ Installation & Setup
 1. Database Configuration
 Ensure PostgreSQL is installed on your system.
 
@@ -68,7 +67,7 @@ npm install
 
 # Start the service locally
 sls offline
-📧 Notification Service
+ Notification Service
 The system utilizes a serverless architecture to handle:
 
 
@@ -77,7 +76,7 @@ SIGNUP_WELCOME: Automated welcome emails for new users.
 
 BOOKING_CONFIRMATION: Instant confirmation alerts upon successful appointment scheduling.
 
-🛡️ Authentication & Security
+ Authentication & Security
 
 Role-Based Access Control (RBAC): Distinct permissions and dashboards for Doctors and Patients.
 
