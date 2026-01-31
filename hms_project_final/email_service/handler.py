@@ -1,22 +1,17 @@
-# Create a new folder named 'email_service' and put this in handler.py
 import json
-import smtplib
-from email.mime.text import MIMEText
 
-
-def send_email(event, context):
-    body = json.loads(event.get('body', '{}'))
-    email_type = body.get('type')
-    recipient = body.get('email') or body.get('patient_email')
-
-    # SMTP Config (Update with your Gmail/SMTP details)
-    msg = MIMEText(f"HMS Notification: {email_type} for appointment at {body.get('start_time')}")
-    msg['Subject'] = "Hospital Management System Update"
-    msg['From'] = "hms-system@example.com"
-    msg['To'] = recipient
-
-    # In a real setup, use actual SMTP server credentials here
-    return {
-        "statusCode": 200,
-        "body": json.dumps({"message": "Email logic triggered successfully"})
-    }
+def send_notification(event, context):
+    try:
+        data = json.loads(event.get('body', '{}'))
+        email_type = data.get('type')  # 'WELCOME' or 'BOOKING'
+        recipient = data.get('email')
+        
+        # In a real scenario, use AWS SES or SendGrid here
+        message = f"Email logic triggered for {recipient} of type {email_type}"
+        
+        return {
+            "statusCode": 200,
+            "body": json.dumps({"status": "success", "message": message})
+        }
+    except Exception as e:
+        return {"statusCode": 500, "body": json.dumps({"error": str(e)})}
