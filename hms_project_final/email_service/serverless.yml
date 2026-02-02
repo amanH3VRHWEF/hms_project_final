@@ -1,19 +1,20 @@
-service: banao-hms-email-service
+service: email-notification-service
 
 provider:
   name: aws
   runtime: python3.9
   region: us-east-1
-  stage: dev
+  environment:
+    EMAIL_USER: ${env:EMAIL_USER}
+    EMAIL_PASSWORD: ${env:EMAIL_PASSWORD}
 
 functions:
-  sendEmail:
-    handler: handler.send_notification
+  send_email:
+    handler: handler.send_email
     events:
       - http:
           path: notify
           method: post
-          cors: true
 
 plugins:
-  - serverless-offline # Allows you to run 'sls offline' for local development
+  - serverless-offline
