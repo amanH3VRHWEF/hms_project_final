@@ -5,8 +5,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm, SlotForm
 from .models import Slot, Booking
 
-# AWS Lambda Endpoint (You will replace this with your actual URL later)
-LAMBDA_EMAIL_URL = "https://your-lambda-id.execute-api.region.amazonaws.com/sendEmail"
+LAMBDA_EMAIL_URL = "http://localhost:3000/dev/send-email"
 
 
 def signup_view(request):
@@ -73,7 +72,7 @@ def book_appointment(request, slot_id):
         }
         try:
             requests.post(LAMBDA_EMAIL_URL, json=payload)
-        except:
-            pass
+        except Exception as e:
+            print(f"ERROR calling Lambda: {e}")
 
     return redirect('dashboard')

@@ -1,6 +1,0 @@
-django
-psycopg2-binary
-google-api-python-client
-google-auth-oauthlib
-requests
-python-dotenv

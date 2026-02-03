@@ -1,4 +1,4 @@
-# Create a new folder named 'email_service' and put this in handler.py
+
 import json
 import smtplib
 from email.mime.text import MIMEText
@@ -12,7 +12,7 @@ def send_email(event, context):
     # SMTP Config (Update with your Gmail/SMTP details)
     msg = MIMEText(f"HMS Notification: {email_type} for appointment at {body.get('start_time')}")
     msg['Subject'] = "Hospital Management System Update"
-    msg['From'] = "hms-system@example.com"
+    msg['From'] = "rajnipal972@gmail.com"
     msg['To'] = recipient
 
     # In a real setup, use actual SMTP server credentials here
