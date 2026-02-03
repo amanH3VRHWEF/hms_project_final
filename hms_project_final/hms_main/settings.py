@@ -2,15 +2,16 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-# Load .env file if you have one, otherwise it uses defaults
+# Load .env file
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY', 'hms-secret-key')
+# SECURITY: Pulled from .env (defaults to local-key if not found)
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-default-key')
 
-DEBUG = True
+# SECURITY: Set to False in production
+DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = ['*']
 
@@ -61,21 +62,24 @@ TEMPLATES = [
 WSGI_APPLICATION = 'hms_main.wsgi.application'
 
 # Database Connection
-# PostgreSQL is required for select_for_update() row locking used in your view
+# Pulling password from .env for security
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'hms_db',
-        'USER': 'postgres',
-        'PASSWORD': 'aman@2007',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'NAME': os.getenv('DB_NAME', 'hms_db'),
+        'USER': os.getenv('DB_USER', 'postgres'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'aman@2007'), # Set this in .env
+        'HOST': os.getenv('DB_HOST', '127.0.0.1'),
+        'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
 
+# --- GOOGLE CALENDAR CONFIGURATION ---
+# Points to the credentials file you downloaded from Google Console
+GOOGLE_CREDENTIALS_FILE = os.path.join(BASE_DIR, 'appointments', 'credentials.json')
+GOOGLE_TOKEN_FILE = os.path.join(BASE_DIR, 'appointments', 'token.json')
+
 # --- SERVERLESS EMAIL CONFIGURATION ---
-# This is the URL of your Serverless Offline service (usually port 3000)
-# Ensure this variable name matches what you use in views.py
 LAMBDA_URL = os.getenv('LAMBDA_URL', 'http://localhost:3000/dev/send-email')
 
 # --- AUTHENTICATION ---
